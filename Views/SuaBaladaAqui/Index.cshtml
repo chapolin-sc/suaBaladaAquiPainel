@@ -1,0 +1,139 @@
+﻿@model IEnumerable<suaBaladaAqui.ViewsModels.boxBaladaViewsModels>;
+
+@{
+    ViewData["Title"] = "suaBaladaAqui";
+    var paginas = 0;
+    var ativo = "";
+}
+
+<!-- Corousel -->
+<div class="row">
+    <div class="col-sm-12 position-relative">
+        <div id="carouselSlides" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/img/festa3.jpg" class="d-block w-100 position-absolute top-50 start-50 translate-middle" alt="suaBaladaAqui">  
+                    <div class="carousel-caption d-none d-md-block text-start">
+                        <h5 class="text-warning">As melhores Baladas da região você encontra aqui!</h5>
+                        <p class="fs-4 text">Procurando algo para sair da rotina? Então você está no lugar certo!</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="~/img/festa2.jpg" class="d-block w-100 position-absolute top-50 start-50 translate-middle" alt="suaBaladaAqui">
+                    <div class="carousel-caption d-none d-md-block text-start">
+                        <h5 class="text-warning">As melhores Baladas da região você encontra aqui!</h5>
+                        <p class="fs-4 text">Procurando algo para sair da rotina? Então você está no lugar certo!</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="~/img/festa1.jpg" class="d-block w-100 position-absolute top-50 start-50 translate-middle" alt="suaBaladaAqui">
+                    <div class="carousel-caption d-none d-md-block text-start">
+                        <h5 class="text-warning">As melhores Baladas da região você encontra aqui!</h5>
+                        <p class="fs-4 text">Procurando algo para sair da rotina? Então você está no lugar certo!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pesquisa -->
+<!--<div class="row">
+    <div class="col-sm-12 bg-light br-gradient">
+        <form asp-action="Pesquisa" method="post" class="w-75 mx-auto py-3" >
+            <div class="row g-3 align-items-center justify-content-evenly">
+                <div class="col-auto form-group w-25">
+                    <select asp-for="tipo" class="form-select" aria-label="Default select example">
+                        <option value="Evento1" selected>Pesquisar por Nome</option>
+                        <option value="Cidade">Pesquisar por Cidade</option>
+                    </select>
+                </div>
+                <div class="col-auto form-group input-group w-25">
+                    <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="button-addon2">
+                    <button type="submit" class="btn btn-outline-secondary" type="button">Pesquisar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>-->
+
+<!-- Conteúdo -->
+<div class="row justify-content-center">  
+    <div class="col-sm-12 py-5 w-75 bg-light bg-gradient">
+        <div class="row row-cols-sm-3">
+            @foreach (var evento in Model)
+            {
+                <div class="col-sm text-center">
+                    <figure class="figure foto-conteudo">
+                        <a data-bs-toggle="modal" data-bs-target="#Model" 
+                        data-bs-target="#Modal" data-bs-whatever="@Html.DisplayFor(modelItem => evento.Imagem)">
+                            <img src="@Html.DisplayFor(modelItem => evento.Imagem)" class="figure-img img-fluid rounded" alt="...">
+                        </a>
+                        <figcaption class="figure-caption text-end">
+                            <span class="fs-6 badge rounded-pill bg-success">
+                                @Html.DisplayFor(modelItem => evento.DataEvento)
+                            </span>
+                            <h5 id="festa-nome" class="fs-4 mb-3 text-dark">
+                                @Html.DisplayFor(modelItem => evento.Evento1)
+                            </h5>
+                            <p id="cid" class="fs-6 text-muted mb-0">
+                                @Html.DisplayFor(modelItem => evento.Cidade)
+                            </p>
+                            <p class="fs-5 text-primary">
+                                Local: 
+                                <span id="local" class="text-dark">
+                                   @Html.DisplayFor(modelItem => evento.LocalName)
+                                </span>
+                            </p>
+                        </figcaption>
+                    </figure>
+                </div> 
+            }
+         </div>
+    </div>
+</div>
+
+<!-- Paginação -->
+<div class="row">
+    <div class="col-sm-12 bg-light bg-gradient">
+        <nav class="w-75 mx-auto">
+            <ul class="pagination justify-content-center">
+                @for(var pags=0; pags<ViewBag.numeroPaginas; pags++)
+                {
+                    paginas++;
+                    if(pags == ViewBag.paginaAtual)
+                    {
+                        ativo = "active";
+                    }else{
+                        ativo = "";
+                    }
+                    
+                    <li class="page-item @ativo">
+                        <a class="page-link" asp-controller="SuaBaladaAqui" asp-action="Index" asp-route-id="@paginas">
+                            @paginas
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+@foreach (var evento in Model)
+{
+    <div class="modal fade" id="Model" tabindex="-1" aria-labelledby="ModalImg" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="@Html.DisplayFor(modelItem => evento.Imagem)" class="w-100" alt="...">
+            </div>
+            </div>
+        </div>
+    </div>
+}
