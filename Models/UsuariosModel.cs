@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace suaBaladaAqui.Models
+namespace suaBaladaAqui2.Models
 {
-    public partial class Usuario
+    public partial class UsuariosModel
     {
-        public Usuario(){}
+        public UsuariosModel(){}
         
-        public Usuario(int id, string nome, string login, string senha, string tipo, DateTime dataCadastro)
+        public UsuariosModel(int id, string nome, string login, string senha, string tipo, DateTime dataCadastro)
         {
             Id = id;
             Nome = nome;

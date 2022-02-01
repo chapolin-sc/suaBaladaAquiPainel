@@ -1,15 +1,22 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
-using suaBaladaAqui.Models;
+using suaBaladaAqui2.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options => {
+        options.LoginPath = new PathString("/Login/Index/");
+        options.AccessDeniedPath = new PathString("/Login/Index/");
+    });
+
 string stringConexao = builder.Configuration.GetConnectionString("ConexaoMysql");
 
-builder.Services.AddDbContext<suaBaladaAquiContext>(options =>
+builder.Services.AddDbContext<suaBaladaAqui2Context>(options =>
     options.UseMySql(stringConexao, ServerVersion.AutoDetect(stringConexao)));
 
 var app = builder.Build();
@@ -31,10 +38,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=SuaBaladaAqui}/{action=Index}/{id?}");
+    pattern: "{controller=suaBaladaAqui2}/{action=Index}/{id?}");
 
 app.Run();

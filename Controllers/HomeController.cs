@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using suaBaladaAqui.Models;
+using suaBaladaAqui2.Models;
 
-namespace suaBaladaAqui.Controllers;
+namespace suaBaladaAqui2.Controllers;
 
 public class HomeController : Controller
 {

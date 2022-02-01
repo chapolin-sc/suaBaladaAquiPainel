@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace suaBaladaAqui.ViewsModels
+namespace suaBaladaAqui2.ViewsModels
 {
     public partial class boxBaladaViewsModels
     {

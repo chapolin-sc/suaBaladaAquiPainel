@@ -1,0 +1,85 @@
+@model suaBaladaAqui2.Models.EventosModel
+
+@{
+    ViewData["Title"] = "Detalhes dos Evento11s";
+}
+
+<h1>Detalhes do Evento11</h1>
+
+<div>
+    <h4>Evento11sModel</h4>
+    <hr />
+    <div class="row">
+        <div class="col-6">
+            <dl class="row">
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Evento1)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Evento1)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Atracoes)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Atracoes)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Cidade)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Cidade)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Bairro)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Bairro)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Endereco)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Endereco)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.LocalName)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.LocalName)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.DataEvento)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.DataEvento)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.FoneContato)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.FoneContato)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Organizador)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Organizador)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Responsavel)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Responsavel)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-4">
+            <img src="@Html.DisplayFor(model => model.Imagem)" height="300" width="400">
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Editar</a> |
+    <a asp-action="Index">Voltar para lista</a>
+</div>

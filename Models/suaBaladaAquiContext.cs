@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using suaBaladaAqui2.Models;
 
-namespace suaBaladaAqui.Models
+namespace suaBaladaAqui2.Models
 {
-    public partial class suaBaladaAquiContext : DbContext
+    public partial class suaBaladaAqui2Context : DbContext
     {
-        public suaBaladaAquiContext()
+        public suaBaladaAqui2Context()
         {
         }
 
-        public suaBaladaAquiContext(DbContextOptions<suaBaladaAquiContext> options)
+        public suaBaladaAqui2Context(DbContextOptions<suaBaladaAqui2Context> options)
             : base(options)
         {
         }
 
         public virtual DbSet<Efmigrationshistory> Efmigrationshistories { get; set; } = null!;
-        public virtual DbSet<Evento> Eventos { get; set; } = null!;
-        public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
+        public virtual DbSet<EventosModel> eventos { get; set; } = null!;
+        public virtual DbSet<UsuariosModel> usuarios { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -46,7 +47,7 @@ namespace suaBaladaAqui.Models
                 entity.Property(e => e.ProductVersion).HasMaxLength(32);
             });
 
-            modelBuilder.Entity<Evento>(entity =>
+            modelBuilder.Entity<EventosModel>(entity =>
             {
                 entity.ToTable("eventos");
 
@@ -77,7 +78,7 @@ namespace suaBaladaAqui.Models
                 entity.Property(e => e.Responsavel).HasColumnName("responsavel");
             });
 
-            modelBuilder.Entity<Usuario>(entity =>
+            modelBuilder.Entity<UsuariosModel>(entity =>
             {
                 entity.ToTable("usuarios");
 

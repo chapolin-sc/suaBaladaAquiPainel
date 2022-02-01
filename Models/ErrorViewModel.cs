@@ -1,4 +1,4 @@
-namespace suaBaladaAqui.Models;
+namespace suaBaladaAqui2.Models;
 
 public class ErrorViewModel
 {

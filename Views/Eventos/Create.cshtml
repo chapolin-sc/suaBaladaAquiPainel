@@ -1,0 +1,90 @@
+@model suaBaladaAqui2.Models.EventosModel
+
+@{
+    ViewData["Title"] = "Adicionar Evento1s";
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<h1>Adicione Evento1</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Evento1" class="control-label"></label>
+                <input asp-for="Evento1" class="form-control" />
+                <span asp-validation-for="Evento1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Imagem" class="control-label"></label>  
+                <input type="file" name="imagemFoto" id="imgFoto" class="form-control" srcset="" />
+                <span asp-validation-for="Imagem" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Atracoes" class="control-label"></label>
+                <input asp-for="Atracoes" class="form-control" />
+                <span asp-validation-for="Atracoes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cidade" class="control-label"></label>
+                <input asp-for="Cidade" class="form-control" />
+                <span asp-validation-for="Cidade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bairro" class="control-label"></label>
+                <input asp-for="Bairro" class="form-control" />
+                <span asp-validation-for="Bairro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Endereco" class="control-label"></label>
+                <input asp-for="Endereco" class="form-control" />
+                <span asp-validation-for="Endereco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocalName" class="control-label"></label>
+                <input asp-for="LocalName" class="form-control" />
+                <span asp-validation-for="LocalName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataEvento" class="control-label"></label>
+                <input asp-for="DataEvento" class="form-control" />
+                <span asp-validation-for="DataEvento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FoneContato" class="control-label"></label>
+                <input asp-for="FoneContato" class="form-control" />
+                <span asp-validation-for="FoneContato" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Organizador" class="control-label"></label>
+                <input asp-for="Organizador" class="form-control" />
+                <span asp-validation-for="Organizador" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Responsavel" class="control-label"></label>
+                <input asp-for="Responsavel" class="form-control" />
+                <span asp-validation-for="Responsavel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Confirme" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+
+    <!-- Visualização da Imagem que foi selecionada -->
+    <div class="col-md-4">
+        <img id="imgSelecionada" height="300"  width="400" >
+    </div>
+    
+</div>
+
+<div>
+    <a asp-action="Index">Voltar para lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace suaBaladaAqui.Models
+namespace suaBaladaAqui2.Models
 {
     public partial class Efmigrationshistory
     {

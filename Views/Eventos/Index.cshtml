@@ -1,0 +1,47 @@
+@model IEnumerable<suaBaladaAqui2.Models.EventosModel>
+
+@{
+    ViewData["Title"] = "Evento1s";
+}
+
+<h1>Lista de Evento1s</h1>
+
+<p>
+    <a asp-action="Create">Adicionar Evento1</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Evento1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Atracoes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataEvento)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Evento1)
+            </td>               
+            <td>
+                @Html.DisplayFor(modelItem => item.Atracoes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataEvento)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
