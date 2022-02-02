@@ -5,14 +5,14 @@ using suaBaladaAqui2.ViewsModels;
 
 namespace suaBaladaAqui2.Controllers
 {
-    public class suaBaladaAqui2Controller : Controller
+    public class SuaBaladaAqui2Controller : Controller
     {
         private int elementosPorPagina = 9; //valor contante
         private int elementosIgnorados = 0;
 
         private readonly suaBaladaAqui2Context _context;
 
-        public suaBaladaAqui2Controller(suaBaladaAqui2Context context){
+        public SuaBaladaAqui2Controller(suaBaladaAqui2Context context){
             _context = context;
         }
 
