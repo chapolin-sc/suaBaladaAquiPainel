@@ -51,7 +51,7 @@ namespace suaBaladaAqui2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Nome,Login,Senha,Tipo,DataCadastro")] UsuariosModel usuariosModel)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Login,Senha,Tipo,DataCadastro")] UsuariosModel usuariosModel)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace suaBaladaAqui2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Nome,Login,Senha,Tipo,DataCadastro")] UsuariosModel usuariosModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Login,Senha,Tipo,DataCadastro")] UsuariosModel usuariosModel)
         {
             if (id != usuariosModel.Id)
             {

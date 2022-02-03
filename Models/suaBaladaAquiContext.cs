@@ -20,6 +20,7 @@ namespace suaBaladaAqui2.Models
         public virtual DbSet<Efmigrationshistory> Efmigrationshistories { get; set; } = null!;
         public virtual DbSet<EventosModel> eventos { get; set; } = null!;
         public virtual DbSet<UsuariosModel> usuarios { get; set; } = null!;
+        public virtual DbSet<CarouselModel> carousel { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 //using painelAdministrativo2.Data;
 using suaBaladaAqui2.Models;
 
-namespace painelAdministrativo2.Controllers
+namespace suaBaladaAqui2.Controllers
 {
     [Authorize]
     public class EventosController : Controller
@@ -53,8 +53,8 @@ namespace painelAdministrativo2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("ID,evento,atracoes,cidade,bairro,endereco,localName,dataEvento,foneContato," +
-            "organizador,responsavel")] EventosModel eventosModel, IFormFile imagemFoto)
+            [Bind("Id,Evento1,Imagem,Atracoes,Cidade,Bairro,Endereco,LocalName,DataEvento,FoneContato," +
+        "Organizador,Responsavel")] EventosModel eventosModel, IFormFile imagemFoto)
         {
             string imreBase64Dados;
             /*if (ModelState.IsValid)
@@ -99,8 +99,8 @@ namespace painelAdministrativo2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, 
-        [Bind("ID,evento,imagem,atracoes,cidade,bairro,endereco,localName,dataEvento,foneContato," +
-        "organizador,responsavel")] EventosModel eventosModel, IFormFile imagemFoto)
+        [Bind("Id,Evento1,Imagem,Atracoes,Cidade,Bairro,Endereco,LocalName,DataEvento,FoneContato," +
+        "Organizador,Responsavel")] EventosModel eventosModel, IFormFile imagemFoto)
 
         {
             if (id != eventosModel.Id)
@@ -109,9 +109,9 @@ namespace painelAdministrativo2.Controllers
             }
 
             string imreBase64Dados;
-
             /*if (ModelState.IsValid)
             {*/
+            
             if (eventosModel != null){
 
                  if(imagemFoto != null)

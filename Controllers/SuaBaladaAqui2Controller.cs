@@ -27,9 +27,9 @@ namespace suaBaladaAqui2.Controllers
                 elementosIgnorados = (int)(elementosPorPagina * (id - 1));
             }
 
+            var DtEventosVisiveis = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1, 21, 0, 0);
             var query = (from evento in _context.eventos
-                        where evento.DataEvento >= DateTime.Today
-                        //(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1)
+                        where evento.DataEvento >= DtEventosVisiveis
                         orderby evento.DataEvento
                         select new boxBaladaViewsModels(evento.Evento1, evento.DataEvento.ToString("dd/MM"), evento.Cidade, 
                         evento.LocalName, evento.Imagem ));
@@ -62,3 +62,6 @@ namespace suaBaladaAqui2.Controllers
 
     }
 }
+
+
+//02/02/2022 21:00:00 > 02/02/2022 05:00:00 
