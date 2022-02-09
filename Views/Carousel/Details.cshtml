@@ -1,0 +1,49 @@
+@model suaBaladaAqui2.Models.CarouselModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>CarouselModel</h4>
+    <hr />
+    <div class="row">
+        <div class="col-6">
+            <dl class="row">
+                <dt class = "col-sm-4">
+                    @Html.DisplayNameFor(model => model.FrasePrincipal)
+                </dt>
+                <dd class = "col-sm-8">
+                    @Html.DisplayFor(model => model.FrasePrincipal)
+                </dd>
+                <dt class = "col-sm-4">
+                    @Html.DisplayNameFor(model => model.FraseSecundaria)
+                </dt>
+                <dd class = "col-sm-8">
+                    @Html.DisplayFor(model => model.FraseSecundaria)
+                </dd>
+                <dt class = "col-sm-4">
+                    @Html.DisplayNameFor(model => model.Ativa)
+                </dt>
+                <dd class = "col-sm-8">
+                    @Html.DisplayFor(model => model.Ativa)
+                </dd>
+                <dt class = "col-sm-4">
+                    @Html.DisplayNameFor(model => model.Ordenacao)
+                </dt>
+                <dd class = "col-sm-8">
+                    @Html.DisplayFor(model => model.Ordenacao)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-3">
+            <img src="@Html.DisplayFor(model => model.Imagem)" height="300" width="400">
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

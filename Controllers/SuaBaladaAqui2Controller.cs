@@ -7,7 +7,7 @@ namespace suaBaladaAqui2.Controllers
 {
     public class SuaBaladaAqui2Controller : Controller
     {
-        private int elementosPorPagina = 9; //valor contante
+        private int elementosPorPagina = 2; //valor contante
         private int elementosIgnorados = 0;
 
         private readonly suaBaladaAqui2Context _context;
@@ -18,33 +18,49 @@ namespace suaBaladaAqui2.Controllers
 
         public async Task<ActionResult> Index(int? id)
         {
-        
-            ViewBag.paginaAtual = 0;
+            
+            ViewBag.paginaAtual = 1;
 
              if (id != null)
             {
-                ViewBag.paginaAtual = (int)(id - 1);
+                ViewBag.paginaAtual = (int)id;
                 elementosIgnorados = (int)(elementosPorPagina * (id - 1));
             }
 
-            var DtEventosVisiveis = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1, 21, 0, 0);
+            var DtEventosVisiveis = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             var query = (from evento in _context.eventos
                         where evento.DataEvento >= DtEventosVisiveis
                         orderby evento.DataEvento
                         select new boxBaladaViewsModels(evento.Evento1, evento.DataEvento.ToString("dd/MM"), evento.Cidade, 
-                        evento.LocalName, evento.Imagem ));
+                        evento.LocalName, evento.Imagem));
 
             ViewBag.numeroBaladas = await _context.eventos.CountAsync();
             ViewBag.numeroPaginas = Math.Ceiling((double)ViewBag.numeroBaladas / (double)elementosPorPagina);
-                        
 
-            return View(await query.AsNoTracking().Skip(elementosIgnorados).Take(elementosPorPagina).ToListAsync());
+            var auxBox = await query.AsNoTracking().Skip(elementosIgnorados).Take(elementosPorPagina).ToListAsync();
+            var dadosIndex = new principalViewModel(dadosCarousel(), auxBox);
+                        
+            return View(dadosIndex);
         }
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Pesquisa([Bind("tipo")] string _tipo)
+        public List<carouselViewModel> dadosCarousel(){
+
+            var query = ( from carousel in _context.carousel
+                          where carousel.Ativa == true
+                          orderby carousel.Ordenacao
+                          select new carouselViewModel (carousel.Imagem, carousel.FrasePrincipal, 
+                          carousel.FraseSecundaria)
+            );
+
+            var listaCarousel = query.AsNoTracking().ToList();
+
+            return listaCarousel;
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        /*public async Task<IActionResult> Pesquisa([Bind("tipo")] string _tipo)
         {
 
             var tipo = "";
@@ -55,10 +71,10 @@ namespace suaBaladaAqui2.Controllers
             /*if (usuariosModel == null)
             {
                 return NotFound();
-            }*/
+            }
             
             return View();
-        }
+        }*/
 
     }
 }

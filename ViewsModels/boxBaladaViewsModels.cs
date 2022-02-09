@@ -1,11 +1,14 @@
-using System;
-using System.Collections.Generic;
+using suaBaladaAqui2.ViewsModels;
 
 namespace suaBaladaAqui2.ViewsModels
 {
     public partial class boxBaladaViewsModels
     {
-        public boxBaladaViewsModels(string evento1, string dataEvento, string cidade, string localName, string imagem)
+        public boxBaladaViewsModels()
+        {}
+        
+        public boxBaladaViewsModels(string evento1, string dataEvento, string cidade, 
+        string localName, string imagem)
         {
             Evento1 = evento1;
             DataEvento = dataEvento;
@@ -19,5 +22,7 @@ namespace suaBaladaAqui2.ViewsModels
         public string Cidade { get; set; } = null!;
         public string LocalName { get; set; } = null!;
         public string Imagem { get; set; } = null!;
+        
     }
+
 }

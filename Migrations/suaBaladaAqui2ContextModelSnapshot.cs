@@ -48,10 +48,10 @@ namespace suaBaladaAqui.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("carousel");
+                    b.ToTable("carousel", (string)null);
                 });
 
-            modelBuilder.Entity("suaBaladaAqui2.Models.Efmigrationshistory", b =>
+            /*modelBuilder.Entity("suaBaladaAqui2.Models.Efmigrationshistory", b =>
                 {
                     b.Property<string>("MigrationId")
                         .HasMaxLength(150)
@@ -165,7 +165,7 @@ namespace suaBaladaAqui.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("usuarios", (string)null);
-                });
+                });*/
 #pragma warning restore 612, 618
         }
     }

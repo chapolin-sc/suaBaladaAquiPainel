@@ -13,7 +13,7 @@ namespace suaBaladaAqui.Migrations
             migrationBuilder.AlterDatabase()
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.CreateTable(
+            /*migrationBuilder.CreateTable(
                 name: "__efmigrationshistory",
                 columns: table => new
                 {
@@ -27,7 +27,7 @@ namespace suaBaladaAqui.Migrations
                     table.PrimaryKey("PRIMARY", x => x.MigrationId);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
+                .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");*/
 
             migrationBuilder.CreateTable(
                 name: "carousel",
@@ -51,7 +51,7 @@ namespace suaBaladaAqui.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
 
-            migrationBuilder.CreateTable(
+            /*migrationBuilder.CreateTable(
                 name: "eventos",
                 columns: table => new
                 {
@@ -107,7 +107,7 @@ namespace suaBaladaAqui.Migrations
                     table.PrimaryKey("PK_usuarios", x => x.ID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
+                .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");*/
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
