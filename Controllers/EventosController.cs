@@ -101,7 +101,6 @@ namespace suaBaladaAqui2.Controllers
         public async Task<IActionResult> Edit(int id, 
         [Bind("Id,Evento1,Imagem,Atracoes,Cidade,Bairro,Endereco,LocalName,DataEvento,FoneContato," +
         "Organizador,Responsavel")] EventosModel eventosModel, IFormFile imagemFoto)
-
         {
             if (id != eventosModel.Id)
             {
@@ -109,9 +108,7 @@ namespace suaBaladaAqui2.Controllers
             }
 
             string imreBase64Dados;
-            /*if (ModelState.IsValid)
-            {*/
-            
+
             if (eventosModel != null){
 
                  if(imagemFoto != null)

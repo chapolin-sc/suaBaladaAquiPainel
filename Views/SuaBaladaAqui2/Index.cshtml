@@ -25,7 +25,7 @@
                     <div class="carousel-item @ativoCarousel">
                         <img src="@Html.DisplayFor(modelItem => carousel.Imagem)" 
                             class="d-block w-100 position-absolute top-50 start-50 translate-middle" alt="suaBaladaAqui2">  
-                        <div class="carousel-caption d-none d-md-block text-start">
+                        <div class="carousel-caption d-md-block text-start">
                             <h5 class="text-warning">@Html.DisplayFor(modelItem => carousel.FrasePrincipal)</h5>
                             <p class="fs-4 text">@Html.DisplayFor(modelItem => carousel.FraseSecundaria)</p>
                         </div>
@@ -37,24 +37,25 @@
 </div>
 
 <!-- Pesquisa -->
-<!--<div class="row">
+<div class="row">
     <div class="col-sm-12 bg-light br-gradient">
-        <form asp-action="Pesquisa" method="post" class="w-75 mx-auto py-3" >
+        <form asp-action="Pesquisa" method="post" class="w-75 mx-auto py-3" enctype="multipart/form-data" >
             <div class="row g-3 align-items-center justify-content-evenly">
-                <div class="col-auto form-group w-25">
-                    <select asp-for="tipo" class="form-select" aria-label="Default select example">
-                        <option value="Evento11" selected>Pesquisar por Nome</option>
-                        <option value="Cidade">Pesquisar por Cidade</option>
+                <div class="col-12 col-sm-5">
+                    <select name="tipo" class="form-select vw-50" aria-label="Default select example">
+                        <option value="Evento" selected>Pesquisar por Nome</option>
                     </select>
                 </div>
-                <div class="col-auto form-group input-group w-25">
-                    <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="button-addon2">
-                    <button type="submit" class="btn btn-outline-secondary" type="button">Pesquisar</button>
+                <div class="col-9 col-sm-5">
+                    <input name="pesquisa" type="text" class="form-control">
+                </div>
+                 <div class="col-3 col-sm-2">
+                    <button type="submit" class="btn btn-primary" type="button">Pesquisar</button>
                 </div>
             </div>
         </form>
     </div>
-</div>-->
+</div>
 
 <!-- Conteúdo -->
 <div class="row justify-content-center">  
@@ -62,7 +63,7 @@
         <div class="row row-cols-sm-3">
             @foreach (var Evento1 in Model.boxPVM)
             {
-                <div class="col-sm text-center">
+                <div class="col-12 col-sm-6 col-lg-4 text-center">
                     <figure class="figure foto-conteudo">
                         <a data-bs-toggle="modal" data-bs-target="#Model" 
                         data-bs-target="#Modal" data-bs-whatever="@Html.DisplayFor(modelItem => Evento1.Imagem)">

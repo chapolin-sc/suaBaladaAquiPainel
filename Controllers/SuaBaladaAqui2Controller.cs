@@ -7,7 +7,7 @@ namespace suaBaladaAqui2.Controllers
 {
     public class SuaBaladaAqui2Controller : Controller
     {
-        private int elementosPorPagina = 2; //valor contante
+        private int elementosPorPagina = 9; //valor contante
         private int elementosIgnorados = 0;
 
         private readonly suaBaladaAqui2Context _context;
@@ -50,31 +50,43 @@ namespace suaBaladaAqui2.Controllers
                           where carousel.Ativa == true
                           orderby carousel.Ordenacao
                           select new carouselViewModel (carousel.Imagem, carousel.FrasePrincipal, 
-                          carousel.FraseSecundaria)
-            );
+                          carousel.FraseSecundaria));
 
             var listaCarousel = query.AsNoTracking().ToList();
 
             return listaCarousel;
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        /*public async Task<IActionResult> Pesquisa([Bind("tipo")] string _tipo)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Pesquisa(string tipo, string pesquisa)
         {
+            try{    
 
-            var tipo = "";
-             if (ModelState.IsValid)
-             {
-                 tipo = _tipo;
-             }
-            /*if (usuariosModel == null)
-            {
-                return NotFound();
+                if(pesquisa == null || pesquisa == ""){
+                    return RedirectToAction(nameof(Index));
+                }
+
+                var DtEventosVisiveis = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+                var query = (from evento in _context.eventos
+                            where evento.DataEvento >= DtEventosVisiveis
+                            where evento.Evento1.Contains(pesquisa)
+                            orderby evento.DataEvento 
+                            select new boxBaladaViewsModels(evento.Evento1, evento.DataEvento.ToString("dd/MM"), evento.Cidade, 
+                            evento.LocalName, evento.Imagem));
+                
+                ViewBag.numeroPaginas = 1;  
+
+                var auxBox = await query.AsNoTracking().Skip(elementosIgnorados).Take(elementosPorPagina).ToListAsync();
+                var dadosIndex = new principalViewModel(dadosCarousel(), auxBox);
+                    
+                return View("Index", dadosIndex);
+
+            }catch{
             }
             
             return View();
-        }*/
+        }
 
     }
 }

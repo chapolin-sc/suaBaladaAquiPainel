@@ -41,6 +41,18 @@ body {
   height: 50vh;
 }
 
+@media (max-width: 680px) {
+  #carouselSlides .carousel-inner, #carouselSlides .carousel-item{
+    height: 30vh;
+  }
+}
+
+@media (max-width: 490px) {
+  #carouselSlides .carousel-inner, #carouselSlides .carousel-item{
+    height: 15vh;
+  }
+}
+
 .carousel-caption {
   height: 30vh;
 }
@@ -53,6 +65,39 @@ body {
 .carousel-caption p {
   font-size: 18px;
   font-weight: 900;
+}
+
+@media (max-width: 680px) {
+  .carousel-caption{
+    height: 20vh;
+  }
+
+  .carousel-caption h5 {
+    font-size: 25px;
+    font-weight: 900;
+  }
+
+  .carousel-caption p {
+    font-size: 13px;
+    font-weight: 900;
+  }
+}
+
+@media (max-width: 490px) {
+  .carousel-caption{
+    height: 14vh;
+  }
+
+  .carousel-caption h5 {
+    font-size: 25px;
+    font-weight: 900;
+  }
+
+  .carousel-caption p {
+    /*font-size: 8px;
+    font-weight: 900;*/
+    display: none;
+  }
 }
 
 .figure-caption p {
