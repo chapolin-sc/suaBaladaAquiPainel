@@ -7,7 +7,7 @@ namespace suaBaladaAqui2.Controllers
 {
     public class SuaBaladaAqui2Controller : Controller
     {
-        private int elementosPorPagina = 9; //valor contante
+        private int elementosPorPagina = 12; //valor contante
         private int elementosIgnorados = 0;
 
         private readonly suaBaladaAqui2Context _context;
@@ -34,7 +34,7 @@ namespace suaBaladaAqui2.Controllers
                         select new boxBaladaViewsModels(evento.Evento1, evento.DataEvento.ToString("dd/MM"), evento.Cidade, 
                         evento.LocalName, evento.Imagem));
 
-            ViewBag.numeroBaladas = await _context.eventos.CountAsync();
+            ViewBag.numeroBaladas = await query.CountAsync();
             ViewBag.numeroPaginas = Math.Ceiling((double)ViewBag.numeroBaladas / (double)elementosPorPagina);
 
             var auxBox = await query.AsNoTracking().Skip(elementosIgnorados).Take(elementosPorPagina).ToListAsync();
