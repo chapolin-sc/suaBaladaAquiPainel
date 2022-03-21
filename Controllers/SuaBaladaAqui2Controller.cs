@@ -7,9 +7,6 @@ namespace suaBaladaAqui2.Controllers
 {
     public class SuaBaladaAqui2Controller : Controller
     {
-        private int elementosPorPagina = 12; //valor contante
-        private int elementosIgnorados = 0;
-
         private readonly suaBaladaAqui2Context _context;
 
         public SuaBaladaAqui2Controller(suaBaladaAqui2Context context){
@@ -18,6 +15,8 @@ namespace suaBaladaAqui2.Controllers
 
         public async Task<ActionResult> Index(int? id)
         {
+            var elementosPorPagina = 12; //valor constante
+            var elementosIgnorados = 0;
             
             ViewBag.paginaAtual = 1;
 
@@ -61,6 +60,9 @@ namespace suaBaladaAqui2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Pesquisa(string tipo, string pesquisa)
         {
+            var elementosPorPagina = 12; //valor constante
+            var elementosIgnorados = 0;
+            
             try{    
 
                 if(pesquisa == null || pesquisa == ""){

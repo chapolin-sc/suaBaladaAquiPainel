@@ -1,7 +1,10 @@
 @model IEnumerable<suaBaladaAqui2.Models.EventosModel>
 
 @{
-    ViewData["Title"] = "Evento1s";
+    ViewData["Title"] = "Eventos";
+
+    var paginas = 0;
+    var ativo = "";
 }
 
 <h1>Lista de Evento1s</h1>
@@ -19,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.Atracoes)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DataEvento)
+                @Html.DisplayNameFor(model => String.Format("{0:MM/dd/yy}", model.DataEvento))
             </th>
             <th></th>
         </tr>
@@ -45,3 +48,26 @@
 }
     </tbody>
 </table>
+
+<div class="row">
+   <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            @for(var pags=0; pags<ViewBag.numeroPaginas; pags++)
+                {
+                    paginas++;
+                    if(pags == (ViewBag.paginaAtual - 1))
+                    {
+                        ativo = "active";
+                    }else{
+                        ativo = "";
+                    }
+                    
+                    <li class="page-item @ativo">
+                        <a class="page-link" asp-controller="Eventos" asp-action="Index" asp-route-id="@paginas">
+                            @paginas
+                        </a>
+                    </li>
+                }
+        </ul>
+    </nav>
+</div>

@@ -10,17 +10,37 @@ namespace suaBaladaAqui2.Controllers
     [Authorize]
     public class EventosController : Controller
     {
+
         private readonly suaBaladaAqui2Context _context;
 
-        public EventosController(suaBaladaAqui2Context context)
+                public EventosController(suaBaladaAqui2Context context)
         {
             _context = context;
         }
 
         // GET: Eventos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-            return View(await _context.eventos.ToListAsync());
+
+            var elementosPorPagina = 15; //valor constante
+            var elementosIgnorados = 0;
+
+            ViewBag.paginaAtual = 1;
+
+            if(id != null){
+                ViewBag.paginaAtual = (int)id;
+                elementosIgnorados = (int)(elementosPorPagina * (id - 1));
+            }
+
+            ViewBag.numeroBaladas = await _context.eventos.CountAsync();
+            ViewBag.numeroPaginas = Math.Ceiling((double)ViewBag.numeroBaladas / (double)elementosPorPagina);
+
+            var query = (from eventos in _context.eventos
+                         orderby eventos.DataEvento
+                         select eventos
+            );
+
+            return View(await query.AsNoTracking().Skip(elementosIgnorados).Take(elementosPorPagina).ToListAsync());
         }
 
         // GET: Eventos/Details/5
