@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-//using painelAdministrativo2.Data;
 using suaBaladaAqui2.Models;
 
 namespace suaBaladaAqui2.Controllers
@@ -13,7 +12,7 @@ namespace suaBaladaAqui2.Controllers
 
         private readonly suaBaladaAqui2Context _context;
 
-                public EventosController(suaBaladaAqui2Context context)
+        public EventosController(suaBaladaAqui2Context context)
         {
             _context = context;
         }

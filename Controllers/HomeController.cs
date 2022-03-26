@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using suaBaladaAqui2.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace suaBaladaAqui2.Controllers;
 

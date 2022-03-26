@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace suaBaladaAqui2.Models
 {
     public class CarouselModel
@@ -17,9 +19,15 @@ namespace suaBaladaAqui2.Models
 
         public int Id { get; set; }
         public string Imagem { get; set; } = null!;
+
+        [Display(Name = "Frase Principal")]
         public string FrasePrincipal { get; set; } = null!;
+
+        [Display(Name = "Frase Secundaria")]
         public string FraseSecundaria { get; set; } = null!;
         public bool Ativa { get; set; }
+
+        [Display(Name = "Ordem")]
         public int Ordenacao { get; set; }
     }
 }

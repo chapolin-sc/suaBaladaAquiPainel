@@ -7,22 +7,22 @@ using suaBaladaAqui2.Models;
 namespace suaBaladaAqui.Controllers
 {
     [Authorize]
-    public class CarouselController : Controller
+    public class BookController : Controller
     {
         private readonly suaBaladaAqui2Context _context;
 
-        public CarouselController(suaBaladaAqui2Context context)
+        public BookController(suaBaladaAqui2Context context)
         {
             _context = context;
         }
 
-        // GET: Carousel
+        // GET: Book
         public async Task<IActionResult> Index()
         {
-            return View(await _context.carousel.ToListAsync());
+            return View(await _context.book.ToListAsync());
         }
 
-        // GET: Carousel/Details/5
+        // GET: Book/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -30,50 +30,62 @@ namespace suaBaladaAqui.Controllers
                 return NotFound();
             }
 
-            var carouselModel = await _context.carousel
+            var bookModel = await _context.book
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (carouselModel == null)
+            if (bookModel == null)
             {
                 return NotFound();
             }
 
-            return View(carouselModel);
+            return View(bookModel);
         }
 
-        // GET: Carousel/Create
+        // GET: Book/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Carousel/Create
+        // POST: Book/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Imagem,FrasePrincipal,FraseSecundaria,Ativa," +
-        "Ordenacao")] CarouselModel carouselModel, IFormFile imagemFoto)
-        {  
+        public async Task<IActionResult> Create([Bind("Id,Nome,Fotografo,data,fotos")] BookModel bookModel,
+        IList<IFormFile> fotos)
+        {
+
             
-            string imreBase64Dados;
-
-                if(imagemFoto != null)
+            if (ModelState.IsValid)
+            {
+                if(fotos != null)
                 {
-                    using (MemoryStream ms = new MemoryStream()){
-                        await imagemFoto.OpenReadStream().CopyToAsync(ms);
-                        imreBase64Dados = Convert.ToBase64String(ms.ToArray());
-                        carouselModel.Imagem = string.Format("data:" + imagemFoto.ContentType + ";base64,{0}", imreBase64Dados);
-                    }
+                    foreach( var f in fotos){
+                        using (MemoryStream ms = new MemoryStream()){
+                            await f.OpenReadStream().CopyToAsync(ms);
 
-                    _context.Add(carouselModel);
+                             var foto = new FotosModel()
+                             {
+                                Foto = f.FileName,
+                                Data = DateTime.Now,
+                                Book = bookModel
+                             };
+                            
+                            bookModel.fotos.Add(foto);
+                            //imreBase64Dados = Convert.ToBase64String(ms.ToArray());
+                            //eventosModel.Imagem = string.Format("data:" + f.ContentType + ";base64,{0}", imreBase64Dados);
+                        }
+                    }   
+
+                    _context.Add(bookModel);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
-
-            return View(carouselModel);
+            }
+            return View(bookModel);
         }
 
-        // GET: Carousel/Edit/5
+        // GET: Book/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,24 +93,22 @@ namespace suaBaladaAqui.Controllers
                 return NotFound();
             }
 
-            var carouselModel = await _context.carousel.FindAsync(id);
-            if (carouselModel == null)
+            var bookModel = await _context.book.FindAsync(id);
+            if (bookModel == null)
             {
                 return NotFound();
             }
-
-            ViewBag.imagemEvento = carouselModel.Imagem;
-            return View(carouselModel);
+            return View(bookModel);
         }
 
-        // POST: Carousel/Edit/5
+        // POST: Book/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Imagem,FrasePrincipal,FraseSecundaria,Ativa,Ordenacao")] CarouselModel carouselModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Fotografo,data")] BookModel bookModel)
         {
-            if (id != carouselModel.Id)
+            if (id != bookModel.Id)
             {
                 return NotFound();
             }
@@ -107,12 +117,12 @@ namespace suaBaladaAqui.Controllers
             {
                 try
                 {
-                    _context.Update(carouselModel);
+                    _context.Update(bookModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CarouselModelExists(carouselModel.Id))
+                    if (!BookModelExists(bookModel.Id))
                     {
                         return NotFound();
                     }
@@ -123,10 +133,10 @@ namespace suaBaladaAqui.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(carouselModel);
+            return View(bookModel);
         }
 
-        // GET: Carousel/Delete/5
+        // GET: Book/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,30 +144,30 @@ namespace suaBaladaAqui.Controllers
                 return NotFound();
             }
 
-            var carouselModel = await _context.carousel
+            var bookModel = await _context.book
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (carouselModel == null)
+            if (bookModel == null)
             {
                 return NotFound();
             }
 
-            return View(carouselModel);
+            return View(bookModel);
         }
 
-        // POST: Carousel/Delete/5
+        // POST: Book/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var carouselModel = await _context.carousel.FindAsync(id);
-            _context.carousel.Remove(carouselModel);
+            var bookModel = await _context.book.FindAsync(id);
+            _context.book.Remove(bookModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CarouselModelExists(int id)
+        private bool BookModelExists(int id)
         {
-            return _context.carousel.Any(e => e.Id == id);
+            return _context.book.Any(e => e.Id == id);
         }
     }
 }

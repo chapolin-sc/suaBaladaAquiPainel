@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace suaBaladaAqui2.Models
 {
@@ -24,16 +25,30 @@ namespace suaBaladaAqui2.Models
         }
 
         public int Id { get; set; }
+
+        [Display(Name = "Eventos")]
         public string Evento1 { get; set; } = null!;
         public string Imagem { get; set; } = null!;
+
+        [Display(Name = "Atrações")]
         public string Atracoes { get; set; } = null!;
         public string Cidade { get; set; } = null!;
         public string Bairro { get; set; } = null!;
+
+        [Display(Name = "Endereço")]
         public string Endereco { get; set; } = null!;
+
+        [Display(Name = "Local")]
         public string LocalName { get; set; } = null!;
+
+        [Display(Name = "Data")]
         public DateTime DataEvento { get; set; }
+
+        [Display(Name = "Contato")]
         public string FoneContato { get; set; } = null!;
         public string Organizador { get; set; } = null!;
+
+        [Display(Name = "Responsável")]
         public string Responsavel { get; set; } = null!;
     }
 }

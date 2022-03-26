@@ -6,13 +6,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace suaBaladaAqui.Migrations
 {
-    public partial class carousel : Migration
+    public partial class bookFotos : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterDatabase()
-                .Annotation("MySql:CharSet", "utf8mb4");
-
             /*migrationBuilder.CreateTable(
                 name: "__efmigrationshistory",
                 columns: table => new
@@ -29,27 +26,24 @@ namespace suaBaladaAqui.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");*/
 
-            /*migrationBuilder.CreateTable(
-                name: "carousel",
+            migrationBuilder.CreateTable(
+                name: "book",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Imagem = table.Column<string>(type: "longtext", nullable: false, collation: "utf8mb4_0900_ai_ci")
+                    Nome = table.Column<string>(type: "longtext", nullable: false, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    FrasePrincipal = table.Column<string>(type: "longtext", nullable: false, collation: "utf8mb4_0900_ai_ci")
+                    Fotografo = table.Column<string>(type: "longtext", nullable: false, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    FraseSecundaria = table.Column<string>(type: "longtext", nullable: false, collation: "utf8mb4_0900_ai_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Ativa = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Ordenacao = table.Column<int>(type: "int", nullable: false)
+                    data = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_carousel", x => x.Id);
+                    table.PrimaryKey("PK_book", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");*/
+                .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
 
             /*migrationBuilder.CreateTable(
                 name: "eventos",
@@ -84,9 +78,27 @@ namespace suaBaladaAqui.Migrations
                     table.PrimaryKey("PK_eventos", x => x.ID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
+                .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");*/
 
             migrationBuilder.CreateTable(
+                name: "fotos",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Foto = table.Column<string>(type: "longtext", nullable: false, collation: "utf8mb4_0900_ai_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    data = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    IdBook = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_fotos", x => x.id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
+
+            /*migrationBuilder.CreateTable(
                 name: "usuarios",
                 columns: table => new
                 {
@@ -113,15 +125,18 @@ namespace suaBaladaAqui.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             /*migrationBuilder.DropTable(
-                name: "__efmigrationshistory");
+                name: "__efmigrationshistory");*/
 
             migrationBuilder.DropTable(
-                name: "carousel");
+                name: "book");
+
+            /*migrationBuilder.DropTable(
+                name: "eventos");*/
 
             migrationBuilder.DropTable(
-                name: "eventos");
+                name: "fotos");
 
-            migrationBuilder.DropTable(
+            /*migrationBuilder.DropTable(
                 name: "usuarios");*/
         }
     }

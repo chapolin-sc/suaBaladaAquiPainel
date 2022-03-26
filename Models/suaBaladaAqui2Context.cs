@@ -21,6 +21,8 @@ namespace suaBaladaAqui2.Models
         public virtual DbSet<EventosModel> eventos { get; set; } = null!;
         public virtual DbSet<UsuariosModel> usuarios { get; set; } = null!;
         public virtual DbSet<CarouselModel> carousel { get; set; } = null!;
+        public virtual DbSet<BookModel> book { get; set; } = null!;
+        public virtual DbSet<FotosModel> fotos { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

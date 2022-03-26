@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using suaBaladaAqui2.Models;
 
@@ -10,9 +11,10 @@ using suaBaladaAqui2.Models;
 namespace suaBaladaAqui.Migrations
 {
     [DbContext(typeof(suaBaladaAqui2Context))]
-    partial class suaBaladaAqui2ContextModelSnapshot : ModelSnapshot
+    [Migration("20220321204147_bookFotos")]
+    partial class bookFotos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,19 +165,17 @@ namespace suaBaladaAqui.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Foto")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int>("IdBook")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("data")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("id");
-
-                    b.HasIndex("BookId");
 
                     b.ToTable("fotos");
                 });
@@ -210,22 +210,6 @@ namespace suaBaladaAqui.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("usuarios", (string)null);
-                });
-
-            modelBuilder.Entity("suaBaladaAqui2.Models.FotosModel", b =>
-                {
-                    b.HasOne("suaBaladaAqui2.Models.BookModel", "Book")
-                        .WithMany("fotos")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("suaBaladaAqui2.Models.BookModel", b =>
-                {
-                    b.Navigation("fotos");
                 });
 #pragma warning restore 612, 618
         }

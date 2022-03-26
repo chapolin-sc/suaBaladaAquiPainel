@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace suaBaladaAqui2.Models
 {
@@ -22,6 +23,8 @@ namespace suaBaladaAqui2.Models
         public string Login { get; set; } = null!;
         public string Senha { get; set; } = null!;
         public string Tipo { get; set; } = null!;
+
+        [Display(Name = "Data")]
         public DateTime DataCadastro { get; set; }
     }
 }
