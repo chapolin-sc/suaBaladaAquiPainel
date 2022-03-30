@@ -4,10 +4,18 @@
     ViewData["Title"] = "Adiconar Book de Festa";
 }
 
+
+<h4>Book de Fotos</h4>
+<hr />
+
 <h1>Adiconar</h1>
 
-<h4>BookModel</h4>
-<hr />
+@if(ViewBag.ErroNome == true){
+    <div>
+        <span>Violação das regras de escrita do nome.</span>
+    </div>
+}
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create" method="post"  enctype="multipart/form-data">
@@ -30,7 +38,7 @@
             <div class="form-group">
                 <label asp-for="fotos" class="control-label"></label>  
                 <input asp-for="fotos" type="file" class="form-control" 
-                accept=".jpg, .jpeg, .png" multiple />
+                accept="image/*" multiple />
                 <span asp-validation-for="fotos" class="text-danger"></span>
             </div>
             <div class="form-group">

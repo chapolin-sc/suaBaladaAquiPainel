@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using suaBaladaAqui2.Models;
+using suaBaladaAqui2.Amazon;
+using System;
 
 namespace suaBaladaAqui.Controllers
 {
@@ -53,36 +55,44 @@ namespace suaBaladaAqui.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nome,Fotografo,data,fotos")] BookModel bookModel,
         IList<IFormFile> fotos)
-        {
-
+        {            
             
             if (ModelState.IsValid)
             {
+                var bucket = new S3classe();
+
                 if(fotos != null)
                 {
                     foreach( var f in fotos){
-                        using (MemoryStream ms = new MemoryStream()){
-                            await f.OpenReadStream().CopyToAsync(ms);
-
-                             var foto = new FotosModel()
+                        var foto = new FotosModel()
                              {
                                 Foto = f.FileName,
                                 Data = DateTime.Now,
                                 Book = bookModel
                              };
-                            
-                            bookModel.fotos.Add(foto);
-                            //imreBase64Dados = Convert.ToBase64String(ms.ToArray());
-                            //eventosModel.Imagem = string.Format("data:" + f.ContentType + ";base64,{0}", imreBase64Dados);
-                        }
+                        bookModel.fotos.Add(foto);
                     }   
-
-                    _context.Add(bookModel);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
                 }
+
+                if(!await bucket.CriarBucketAsync(NomeBucketTratamento(bookModel.Nome))){
+                    ViewBag.ErroNome = true;
+                    return View();
+                }
+
+                _context.Add(bookModel);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
             }
             return View(bookModel);
+        }
+
+        //Trata os nomes do book para ciração do bucket na aws
+        private string NomeBucketTratamento(string nomeBucket){
+            var nome = nomeBucket.ToLower();
+            nome = nome.Replace(' ', '-');
+            nome = "suabaladaaqui-" + nome;
+            return nome;
         }
 
         // GET: Book/Edit/5
