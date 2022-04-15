@@ -10,9 +10,14 @@ namespace suaBaladaAqui2.Amazon
         public S3classe(){
         }
         
-        //private const string bucketNome = "";
         private static readonly RegionEndpoint bucketRegiao = RegionEndpoint.USEast1;
         private static IAmazonS3 s3Cliente = new AmazonS3Client(bucketRegiao);
+
+        private string nomeBucket = "";
+        private string nomeArquivo = "";
+        private string caminhoArquivo = "";
+        
+
 
         public async Task<bool> CriarBucketAsync(string bucketNome){
             try{

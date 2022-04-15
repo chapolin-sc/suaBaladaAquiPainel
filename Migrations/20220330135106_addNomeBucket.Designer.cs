@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using suaBaladaAqui2.Models;
 
@@ -10,9 +11,10 @@ using suaBaladaAqui2.Models;
 namespace suaBaladaAqui.Migrations
 {
     [DbContext(typeof(suaBaladaAqui2Context))]
-    partial class suaBaladaAqui2ContextModelSnapshot : ModelSnapshot
+    [Migration("20220330135106_addNomeBucket")]
+    partial class addNomeBucket
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

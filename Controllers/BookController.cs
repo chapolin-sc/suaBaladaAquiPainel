@@ -45,7 +45,8 @@ namespace suaBaladaAqui.Controllers
         // GET: Book/Create
         public IActionResult Create()
         {
-            return View();
+
+            return View(new BookModel());
         }
 
         // POST: Book/Create
@@ -53,10 +54,9 @@ namespace suaBaladaAqui.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Fotografo,data,fotos")] BookModel bookModel,
+        public async Task<IActionResult> Create([Bind("Id,Nome,Fotografo,data,fotos,NomeBucketnaAws")] BookModel bookModel,
         IList<IFormFile> fotos)
         {            
-            
             if (ModelState.IsValid)
             {
                 var bucket = new S3classe();
@@ -73,14 +73,21 @@ namespace suaBaladaAqui.Controllers
                         bookModel.fotos.Add(foto);
                     }   
                 }
+                
+                var nomeBucketAws = NomeBucketTratamento(bookModel.Nome);
+                bookModel.NomeBucketnaAws = nomeBucketAws;
 
-                if(!await bucket.CriarBucketAsync(NomeBucketTratamento(bookModel.Nome))){
+                if(!await bucket.CriarBucketAsync(nomeBucketAws)){
                     ViewBag.ErroNome = true;
                     return View();
                 }
 
+                /*
+                    Para fazer - Salvar os arquivos da fotos na aws
+                */
+
                 _context.Add(bookModel);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();// já salva as fotos no banco
 
                 return RedirectToAction(nameof(Index));
             }

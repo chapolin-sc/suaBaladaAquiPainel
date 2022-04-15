@@ -6,13 +6,15 @@ namespace suaBaladaAqui2.Models
     {
         public BookModel(){
         }
-        public BookModel(int id, string nome, string fotografo, DateTime data, ICollection<FotosModel> fotos)
+        public BookModel(int id, string nome, string fotografo, DateTime data, 
+        ICollection<FotosModel> fotos, string NomeBucketnaAws)
         {
             Id = id;
             Nome = nome;
             Fotografo = fotografo;
             this.data = data;
             this.fotos = fotos;
+            this.NomeBucketnaAws = NomeBucketnaAws;
         }
 
         public int Id { get; set; }
@@ -26,6 +28,8 @@ namespace suaBaladaAqui2.Models
         public DateTime data { get; set; }
         
         public ICollection<FotosModel> fotos { get; set; } = null!;
+
+        public string NomeBucketnaAws { get; set; }
 
     }
 }
