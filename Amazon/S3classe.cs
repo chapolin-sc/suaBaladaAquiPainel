@@ -1,5 +1,8 @@
+using System;
+using System.Threading.Tasks;
 using Amazon;
 using Amazon.S3;
+using Amazon.S3.Transfer;
 using Amazon.S3.Model;
 using Amazon.S3.Util;
 
@@ -9,15 +12,18 @@ namespace suaBaladaAqui2.Amazon
     {
         public S3classe(){
         }
+
+        /*public S3classe(string nomeBucket, string nomeArquivo, string caminhoArquivo){
+            this.nomeBucket = nomeBucket;
+            this.nomeArquivo = nomeArquivo;
+            this.caminhoArquivo = caminhoArquivo;
+        }*/
+        /*private string nomeBucket = "";
+        private string nomeArquivo = "";
+        private string caminhoArquivo = "";   */  
         
         private static readonly RegionEndpoint bucketRegiao = RegionEndpoint.USEast1;
         private static IAmazonS3 s3Cliente = new AmazonS3Client(bucketRegiao);
-
-        private string nomeBucket = "";
-        private string nomeArquivo = "";
-        private string caminhoArquivo = "";
-        
-
 
         public async Task<bool> CriarBucketAsync(string bucketNome){
             try{
@@ -45,6 +51,27 @@ namespace suaBaladaAqui2.Amazon
                 return false;
             }
         }
-    }
 
+        public async Task<bool> SalvandoArquivosNoBucketS3Async(IFormFile arquivo, string nomeBucket, 
+        string nomeArquivo){
+            try{
+                
+                var transferAquivo = new TransferUtility(s3Cliente);
+                using(MemoryStream ms = new MemoryStream()){
+                    await arquivo.OpenReadStream().CopyToAsync(ms);
+                    await transferAquivo.UploadAsync(ms, nomeBucket, nomeArquivo);
+                }
+
+                return true;
+
+            }catch(AmazonS3Exception e){
+                Console.WriteLine(e.Message);
+                return false;
+            }catch(Exception  e){
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+    }
 }

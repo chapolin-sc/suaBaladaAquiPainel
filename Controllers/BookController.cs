@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using suaBaladaAqui2.Models;
+using suaBaladaAqui2.ServiceModels;
 using suaBaladaAqui2.Amazon;
-using System;
 
 namespace suaBaladaAqui.Controllers
 {
@@ -45,8 +45,7 @@ namespace suaBaladaAqui.Controllers
         // GET: Book/Create
         public IActionResult Create()
         {
-
-            return View(new BookModel());
+            return View();
         }
 
         // POST: Book/Create
@@ -54,44 +53,33 @@ namespace suaBaladaAqui.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Fotografo,data,fotos,NomeBucketnaAws")] BookModel bookModel,
-        IList<IFormFile> fotos)
+        public async Task<IActionResult> Create([Bind("nome,nomeFotografo,data")] BookServiceModel bookServiceModel)
         {            
             if (ModelState.IsValid)
             {
                 var bucket = new S3classe();
-
-                if(fotos != null)
-                {
-                    foreach( var f in fotos){
-                        var foto = new FotosModel()
-                             {
-                                Foto = f.FileName,
-                                Data = DateTime.Now,
-                                Book = bookModel
-                             };
-                        bookModel.fotos.Add(foto);
-                    }   
-                }
-                
-                var nomeBucketAws = NomeBucketTratamento(bookModel.Nome);
-                bookModel.NomeBucketnaAws = nomeBucketAws;
+            
+                var nomeBucketAws = NomeBucketTratamento(bookServiceModel.nome);
 
                 if(!await bucket.CriarBucketAsync(nomeBucketAws)){
                     ViewBag.ErroNome = true;
                     return View();
+                }else{
+                    var bookModel = new BookModel(){
+                        Nome = bookServiceModel.nome,
+                        Fotografo = bookServiceModel.nomeFotografo,
+                        data = bookServiceModel.data,
+                        fotos = null,
+                        NomeBucketnaAws = nomeBucketAws
+                    };
+
+                    _context.Add(bookModel);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
                 }
-
-                /*
-                    Para fazer - Salvar os arquivos da fotos na aws
-                */
-
-                _context.Add(bookModel);
-                await _context.SaveChangesAsync();// já salva as fotos no banco
-
-                return RedirectToAction(nameof(Index));
             }
-            return View(bookModel);
+            return View(bookServiceModel);
         }
 
         //Trata os nomes do book para ciração do bucket na aws

@@ -1,4 +1,4 @@
-@model suaBaladaAqui2.Models.BookModel
+@model suaBaladaAqui2.ServiceModels.BookServiceModel
 
 @{
     ViewData["Title"] = "Adiconar Book de Festa";
@@ -18,33 +18,30 @@
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" method="post"  enctype="multipart/form-data">
+        <!--<form asp-action="Create" method="post" enctype="multipart/form-data">-->
+        <form asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+                <label asp-for="nome" class="control-label"></label>
+                <input asp-for="nome" class="form-control" />
+                <span asp-validation-for="nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Fotografo" class="control-label"></label>
-                <input asp-for="Fotografo" class="form-control" />
-                <span asp-validation-for="Fotografo" class="text-danger"></span>
+                <label asp-for="nomeFotografo" class="control-label"></label>
+                <input asp-for="nomeFotografo" class="form-control" />
+                <span asp-validation-for="nomeFotografo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="data" class="control-label"></label>
                 <input asp-for="data" class="form-control" />
                 <span asp-validation-for="data" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label asp-for="fotos" class="control-label"></label>  
                 <input asp-for="fotos" type="file" class="form-control" 
                 accept="image/*" multiple />
                 <span asp-validation-for="fotos" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="NomeBucketnaAws" type="hidden" class="form-control" value="nulo" />
-            </div>
-
+            </div>-->
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
